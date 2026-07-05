@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+        
+model User {
+  id            String          @id 
+  email         String          @unique
+  points        Int             @default(0)
+  journalings   Journaling[]
+  dailyTasks    Task[]
+  conversations Conversation[]
+}
+
+model Journaling {
+  id              Int      @id @default(autoincrement())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  date            DateTime @default(now())
+  mood            String
+  keyTakeaway     String
+  wordAffirmation String
+  summary         String  
+  tasks           Task[]
+  chat            Json[]
+  type            JournalType
+}
+
+enum JournalType {
+  CBT
+  ZEN
+}
+
+model Task {
+  id             Int      @id @default(autoincrement())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  journalingId   Int?
+  journaling     Journaling? @relation(fields: [journalingId], references: [id])
+  description    String
+  dateAssigned   DateTime @default(now())
+  dateCompleted  DateTime?
+  pointsEarned   Int      @default(0)
+  accepted       Boolean  @default(false)
+}
+
+model Conversation {
+  id              Int      @id @default(autoincrement())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  mode            ConversationMode
+  date            DateTime @default(now())
+  chat            Json[]
+  emotionalStats  Json
+}
+
+enum ConversationMode {
+  ZEN
+  SITUATIONAL
+}
