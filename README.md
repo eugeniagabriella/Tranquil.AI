@@ -1,6 +1,6 @@
 # Tranquil.AI
 
-A CBT-based journaling platform built during a 48-hour hackathon to help users manage social anxiety through structured reflection and AI-assisted emotional support.
+A CBT-based journaling platform built to help users manage social anxiety through structured reflection and AI-assisted emotional support.
 
 **Project Period:** June 2024
 
