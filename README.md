@@ -2,7 +2,7 @@
 
 A CBT-based journaling platform built to help users manage social anxiety through structured reflection and AI-assisted emotional support.
 
-**Project Period:** June 2024
+**Project Period:** July 2024
 
 ---
 
